@@ -1,5 +1,10 @@
 import ReactPaginate from 'react-paginate';
 
+// interface PaginationProps extends ChangePageData {
+//   // changePage: () => void
+//   totalPages: number
+// }
+
 function Pagination({changePage, totalPages}: any) {
   return (
     <div >

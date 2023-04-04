@@ -1,4 +1,3 @@
-import React from 'react';
 import { IAnimeCard } from '../interfaces/IAnimeCard';
 import AnimeCard from '../components/AnimeCard';
 
