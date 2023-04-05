@@ -40,7 +40,7 @@ export function SingleAnime() {
               Genres: {genres}</p>
           </div>
         </div> 
-        <p className='text-xl absolute w-3/5 left-[420px]'>
+        <p className='text-xl absolute w-3/5 left-[414px]'>
           {singleAnime?.synopsis}</p>  
       </div>
   );
