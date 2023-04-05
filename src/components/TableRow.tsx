@@ -9,11 +9,6 @@ function TableRow({anime}: AnimeProps) {
   const genres = anime.genres.map(genre => genre.name).join(', ');
   let navigate = useNavigate();
 
-  const openAnime = (event: any) => {
-    console.log(`open ${anime.title}`);
-    navigate(`https://api.jikan.moe/v4/anime/${anime.mal_id}`)
-  }
-
   return (
     <tr key={anime.mal_id} 
         className='even:bg-lime-50 hover:bg-lime-100 active:hover:bg-lime-200'>

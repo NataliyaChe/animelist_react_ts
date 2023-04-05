@@ -16,32 +16,64 @@ export function SingleAnime() {
       fetchSingleAnime()
     }, []);
 
+
+  
+  const getAnimesByGenres = (event: any) => {
+    console.log('genre');
+    
+  }
   return (
       <div className='p-8'>
-        <div className='flex gap-20 mb-6 text-lime-900'>
+        <div className='grid grid-cols-[30%_60%] gap-y-14 mb-6 text-lime-900'>
           <img 
             src={singleAnime?.images.webp.large_image_url} 
-            className='p-5 border-2 border-solid border-lime-600 w-[300px]'/>
-          <div className='relative'>
+            className='p-5 border-2 border-solid border-lime-600 max-w-[400px] '/>
+          <div className=''>
             <h2 
               className='text-3xl font-bold pb-6 text-lime-900'>
-              {singleAnime?.title}</h2>
+              {singleAnime?.title}
+            </h2>
             <p 
-              className='text-xl font-semibold pb-4 text-lime-900'>
-              Type: {singleAnime?.type}</p>
+              className='text-xl font-bold pb-4 text-lime-900'>
+              Type: 
+              <span 
+                className='text-xl font-semibold pb-4 text-lime-900 ml-6'>{singleAnime?.type}
+              </span>
+            </p>
             <p 
-              className='text-xl font-semibold pb-4 text-lime-900'>
-              Year: {singleAnime?.year}</p>
+              className='text-xl font-bold pb-4 text-lime-900'>
+              Year: 
+              <span 
+                className='text-xl font-semibold pb-4 text-lime-900 ml-6'>{singleAnime?.year}
+              </span>
+            </p>
             <p 
-              className='text-xl font-semibold pb-4 text-lime-900'>
-              Episodes: {singleAnime?.episodes}</p>
-            <p 
-              className='text-xl font-semibold pb-4 text-lime-900'>
-              Genres: {genres}</p>
+              className='text-xl font-bold pb-4 text-lime-900'>
+              Episodes: 
+              <span 
+                className='text-xl font-semibold pb-4 text-lime-900 ml-6'>{singleAnime?.episodes}
+              </span>
+            </p>
           </div>
-        </div> 
-        <p className='text-xl absolute w-3/5 left-[414px]'>
-          {singleAnime?.synopsis}</p>  
+          <div>
+            <h3 
+              className='text-2xl font-bold pb-4 text-lime-900'>
+              Genres: 
+            </h3>
+            {singleAnime?.genres.map(genre =>
+            <p 
+              className='bg-lime-400 px-3 pt-1 pb-2 rounded-md font-semibold w-40 mb-2 hover:bg-lime-100 text-lg'
+              key={genre.mal_id}
+              onClick={getAnimesByGenres}>
+              {genre.name}
+            </p>)
+          }  
+          </div>
+          <p 
+            className='text-xl p-5'>
+            {singleAnime?.synopsis}
+          </p>  
+        </div>  
       </div>
   );
 }
