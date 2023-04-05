@@ -16,11 +16,11 @@ function Pagination({changePage, totalPages}: PaginationProps) {
            previousClassName='bg-lime-400 p-2 w-12 h-12 rounded-full mr-4 text-center'
            previousLinkClassName='font-bold text-lime-900 text-lg p-2  w-12 h-12'
            nextClassName='bg-lime-400 p-2 w-12 h-12 rounded-full ml-4 text-center'
-           nextLinkClassName=' bg-lime-400 font-bold text-lime-900 text-lg p-2  w-12 h-12'
+           nextLinkClassName=' font-bold text-lime-900 text-lg p-2  w-12 h-12'
            marginPagesDisplayed={2}
            containerClassName='flex mt-5 gap-0.5'
-           activeClassName='bg-lime-200'
-           activeLinkClassName='font-bold text-lime-900 text-lg'
+           activeClassName='bg-lime-100 border-2 border-lime-600'
+           activeLinkClassName='font-bold text-lime-900 text-lg align-bottom'
            breakClassName='bg-lime-400 p-2 w-12 h-12 rounded-full text-center'
           breakLabel="..."
           nextLabel=">"

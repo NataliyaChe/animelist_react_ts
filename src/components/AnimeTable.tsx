@@ -28,7 +28,7 @@ function AnimeTable ({animes}: AnimelistProps) {
                     </th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody className=''>
                 {/* {animes.map((anime) => <tr key={anime.mal_id}>
                     <td className='p-4'>{anime.rank}</td>
                     <td className='p-4'>{anime.title}</td>
