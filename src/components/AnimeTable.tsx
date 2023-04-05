@@ -8,7 +8,7 @@ interface AnimelistProps {
 function AnimeTable ({animes}: AnimelistProps) {
 
     return (
-        <table className='w-9/12 border-collapse border-solid border-2 border-lime-600'>
+        <table className='w-10/12 border-collapse border-solid border-2  border-lime-600'>
             <thead>
                 <tr className='bg-lime-400'>
                     <th className='p-5'>
