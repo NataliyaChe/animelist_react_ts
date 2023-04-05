@@ -2,7 +2,7 @@ export interface IAnimeCard {
     mal_id: number
     title: string
     genres?: []
-    score: number
+    type: number
     year: number
     rating: string
     episodes: number

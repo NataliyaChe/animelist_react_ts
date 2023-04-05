@@ -2,19 +2,19 @@ import React, { useState, useEffect } from 'react';
 import Animelist from '../components/Animelist';
 import { IAnimeCard } from '../interfaces/IAnimeCard';
 import Pagination from '../components/Pagination';
+import {ChangePageData} from '../interfaces/IEvent';
+import AnimeTable from '../components/AnimeTable';
 
 interface AnimeData {
   data: IAnimeCard[]
   pagination: {
-    items: {
-      total: number
-    }
+    last_visible_page: number
   }
 }
 
-interface ChangePageData {
-  selected: number
-}
+// export interface ChangePageData {
+//   selected: number
+// }
 
 export function Main() {
   const [animes, setAnimes] = useState<IAnimeCard[]>([]);
@@ -26,7 +26,10 @@ export function Main() {
     const fetchAnimes = async () => {
       const data = await fetch(`https://api.jikan.moe/v4/top/anime?limit=${animesPerPage}&page=${currentPage}`);
       const animes = await data.json() as AnimeData;
-      setTotalPages(animes.pagination.items.total);
+      console.log(animes.pagination);
+      
+      setTotalPages(animes.pagination.last_visible_page
+        );
       setAnimes(animes.data);
     }
     fetchAnimes()
@@ -37,13 +40,14 @@ export function Main() {
   }
 
   return (
-    <>
-      <Animelist animes={animes}/>
+    <div className='p-8'>
+      {/* <Animelist animes={animes}/> */}
+      <AnimeTable animes={animes}/>
       <Pagination 
           changePage={changePage} 
           totalPages={totalPages}
       />
-    </>
+    </div>
   );
 }
 
