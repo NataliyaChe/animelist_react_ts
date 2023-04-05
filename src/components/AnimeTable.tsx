@@ -1,12 +1,12 @@
 import { IAnimeCard } from '../interfaces/IAnimeCard';
-import AnimeCard from '../components/AnimeCard';
+import TableRow from './TableRow';
 
 interface AnimelistProps {
   animes: IAnimeCard[]
 }
 
 function AnimeTable ({animes}: AnimelistProps) {
-    console.log(animes);
+
     return (
         <table className='w-9/12 border-collapse border-solid border-2 border-lime-600'>
             <thead>
@@ -36,7 +36,7 @@ function AnimeTable ({animes}: AnimelistProps) {
             </thead>
             <tbody>
                 {animes.map(anime => 
-                    <AnimeCard anime={anime} key={anime.mal_id} />
+                    <TableRow anime={anime} key={anime.mal_id} />
                 )} 
             </tbody>
         </table>
