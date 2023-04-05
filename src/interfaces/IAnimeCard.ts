@@ -1,10 +1,14 @@
 export interface IAnimeCard {
     mal_id: number
     title: string
-    genres?: []
+    genres: [
+        {
+            mal_id: number
+            name: string
+        }
+    ]
     type: number
     year: number
-    rating: string
     episodes: number
     images: {
         webp: {

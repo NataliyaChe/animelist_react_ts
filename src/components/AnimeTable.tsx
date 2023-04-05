@@ -6,7 +6,7 @@ interface AnimelistProps {
 }
 
 function AnimeTable ({animes}: AnimelistProps) {
-    
+    console.log(animes);
     return (
         <table className='w-9/12 border-collapse border-solid border-2 border-lime-600'>
             <thead>
@@ -24,19 +24,17 @@ function AnimeTable ({animes}: AnimelistProps) {
                         Year
                     </th>
                     <th className='p-5'>
+                        Genre
+                    </th>
+                    <th className='p-5'>
                         Episodes
+                    </th>
+                    <th className='p-5'>
+                        Actions
                     </th>
                 </tr>
             </thead>
             <tbody className=''>
-                {/* {animes.map((anime) => <tr key={anime.mal_id}>
-                    <td className='p-4'>{anime.rank}</td>
-                    <td className='p-4'>{anime.title}</td>
-                    <td className='p-4'>{anime.type}</td>
-                    <td className='p-4'>{anime.year}</td>
-                    <td className='p-4'>{anime.episodes}</td>
-                </tr>
-                )} */}
                 {animes.map(anime => 
                     <AnimeCard anime={anime} key={anime.mal_id} />
                 )} 
