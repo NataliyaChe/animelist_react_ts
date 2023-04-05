@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import Animelist from '../components/Animelist';
+import { useState, useEffect } from 'react';
+// import Animelist from '../components/Animelist';
 import { IAnimeCard } from '../interfaces/IAnimeCard';
 import Pagination from '../components/Pagination';
 import {ChangePageData} from '../interfaces/IEvent';

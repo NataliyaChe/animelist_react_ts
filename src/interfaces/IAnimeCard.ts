@@ -16,4 +16,5 @@ export interface IAnimeCard {
         }
     }
     rank: number
+    synopsis: string
 }

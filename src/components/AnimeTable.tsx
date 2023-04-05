@@ -34,7 +34,7 @@ function AnimeTable ({animes}: AnimelistProps) {
                     </th>
                 </tr>
             </thead>
-            <tbody className=''>
+            <tbody>
                 {animes.map(anime => 
                     <AnimeCard anime={anime} key={anime.mal_id} />
                 )} 

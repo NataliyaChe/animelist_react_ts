@@ -1,11 +1,20 @@
 import { IAnimeCard } from '../interfaces/IAnimeCard';
+import {useNavigate} from 'react-router-dom';
 
 interface AnimeProps {
   anime: IAnimeCard
 }
 
 function AnimeCard({anime}: AnimeProps) {
-  const genres = anime.genres.map(genre => genre.name).join(', ')
+  const genres = anime.genres.map(genre => genre.name).join(', ');
+  let navigate = useNavigate();
+
+  const openAnime = (event: any) => {
+    console.log(`open ${anime.title}`);
+    navigate(`https://api.jikan.moe/v4/anime/${anime.mal_id}`)
+  }
+
+
 
   return (
     <tr key={anime.mal_id} 
@@ -39,7 +48,9 @@ function AnimeCard({anime}: AnimeProps) {
         </td>
         <td className='p-4 w-16 text-lime-900 text-center'>
           <button 
-            className='bg-lime-400 px-3 pt-1 pb-2 rounded-md font-semibold'>
+            className='bg-lime-400 px-3 pt-1 pb-2 rounded-md font-semibold'
+            // onClick={openAnime}
+            onClick={() => navigate(`/${anime.mal_id}`)}>
             Open
           </button>
         </td>
