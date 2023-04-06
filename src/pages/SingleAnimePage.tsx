@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import {useParams} from 'react-router-dom';
-import { IAnimeCard } from '../interfaces/IAnimeCard';
+import { IAnimeCard } from '../interfaces/animeInterfaces';
 
 export function SingleAnime() {
   const params = useParams();

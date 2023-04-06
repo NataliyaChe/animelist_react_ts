@@ -1,11 +1,11 @@
-import { IAnimeCard } from '../interfaces/IAnimeCard';
+import { IAnimeCard } from '../interfaces/animeInterfaces';
 import TableRow from './TableRow';
 
-interface AnimelistProps {
+interface AnimeTableProps {
   animes: IAnimeCard[]
 }
 
-function AnimeTable ({animes}: AnimelistProps) {
+function AnimeTable ({animes}: AnimeTableProps) {
 
     return (
         <table className='w-10/12 border-collapse border-solid border-2  border-lime-600'>
@@ -31,6 +31,9 @@ function AnimeTable ({animes}: AnimelistProps) {
                     </th>
                     <th className='p-5'>
                         Actions
+                    </th>
+                    <th className='p-5'>
+                        Favorites
                     </th>
                 </tr>
             </thead>

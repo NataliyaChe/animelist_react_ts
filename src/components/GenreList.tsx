@@ -1,4 +1,4 @@
-import { IGenre } from '../interfaces/IAnimeCard';
+import { IGenre } from '../interfaces/animeInterfaces';
 
 interface GenrelistProps {
     genres: IGenre[]

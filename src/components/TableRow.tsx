@@ -1,13 +1,17 @@
-import { IAnimeCard } from '../interfaces/IAnimeCard';
+import { IAnimeCard } from '../interfaces/animeInterfaces';
 import {useNavigate} from 'react-router-dom';
 
-interface AnimeProps {
+interface TableRowProps {
   anime: IAnimeCard
 }
 
-function TableRow({anime}: AnimeProps) {
+function TableRow({anime}: TableRowProps) {
   const genres = anime.genres.map(genre => genre.name).join(', ');
   let navigate = useNavigate();
+
+// const addToFavorites = (event: any) => {
+  
+// }
 
   return (
     <tr key={anime.mal_id} 
@@ -42,6 +46,9 @@ function TableRow({anime}: AnimeProps) {
             onClick={() => navigate(`/${anime.mal_id}`)}>
             Open
           </button>
+        </td>
+        <td className='p-4 w-16 text-lime-900 text-center'>
+            Add to favorites
         </td>
     </tr>
   );
