@@ -6,6 +6,7 @@ export function Navigation() {
         <span className='font-bold text-4xl'>Animelist</span>
         <span>
             <Link to='/' className='mr-6 font-bold text-2xl'>Anime</Link>
+            <Link to='/favorite' className='mr-6 font-bold text-2xl'>Favorite</Link>
             <Link to='/about' className='font-bold text-2xl'>About</Link>
         </span>
     </nav>

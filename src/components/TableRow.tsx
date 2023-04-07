@@ -1,17 +1,42 @@
-import { IAnimeCard } from '../interfaces/animeInterfaces';
+import { useState } from 'react';
+import { IAnimeCard, IGenre } from '../interfaces/animeInterfaces';
 import {useNavigate} from 'react-router-dom';
 
 interface TableRowProps {
   anime: IAnimeCard
+  isMain: boolean
+  deleteFromFavorite?: any
 }
 
-function TableRow({anime}: TableRowProps) {
+function TableRow({anime, isMain, deleteFromFavorite}: TableRowProps) {
   const genres = anime.genres.map(genre => genre.name).join(', ');
   let navigate = useNavigate();
 
-// const addToFavorites = (event: any) => {
-  
-// }
+  const updateFavorites = (event: React.MouseEvent) => {
+    if(isMain) {
+      const favoriteAnime: IAnimeCard  = {
+        "id": anime.mal_id,
+        "mal_id": anime.mal_id,
+        "title": anime.title,
+        "genres": anime.genres,
+        "type": anime.type,
+        "year": anime.year,
+        "episodes": anime.episodes,
+        "images": anime.images,
+        "rank": anime.rank,
+        "synopsis": anime.synopsis
+      }
+      post(favoriteAnime);
+    } 
+}
+
+function post(favoriteAnime: IAnimeCard) {
+  fetch('http://localhost:3004/favorites', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(favoriteAnime)
+  })
+}
 
   return (
     <tr key={anime.mal_id} 
@@ -48,7 +73,11 @@ function TableRow({anime}: TableRowProps) {
           </button>
         </td>
         <td className='p-4 w-16 text-lime-900 text-center'>
-            Add to favorites
+          <button 
+              className={ isMain ? "bg-notfavorite bg-no-repeat w-10 h-10 bg-contain rounded-md font-semibold" : "bg-isfavorite bg-no-repeat w-10 h-10 bg-contain rounded-md font-semibold" }
+              data-id={anime.id}
+              onClick={isMain ? updateFavorites : deleteFromFavorite}>
+          </button>
         </td>
     </tr>
   );

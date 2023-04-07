@@ -1,16 +1,23 @@
 import { useEffect, useState } from 'react';
 import {useParams} from 'react-router-dom';
 import { IAnimeCard } from '../interfaces/animeInterfaces';
+import { useApi } from '../hooks/useApi'
 
 export function SingleAnime() {
   const params = useParams();
   const [singleAnime, setSingleAnime] = useState<IAnimeCard>();
-  const genres = singleAnime?.genres.map(genre => genre.name).join(', ');
+  const {getItem} = useApi();
 
   useEffect(() => {
+    console.log('params.mal_id', params.mal_id);
+    
+    const animeId = params.mal_id
       const fetchSingleAnime = async () => {
         const data = await fetch(`https://api.jikan.moe/v4/anime/${params.mal_id}`);
         const singleAnime = await data.json();
+        console.log('singleAnime', singleAnime);
+        
+        // const singleAnime = await getItem(animeId)
         setSingleAnime(singleAnime.data);
       }
       fetchSingleAnime()
@@ -20,8 +27,10 @@ export function SingleAnime() {
   
   const getAnimesByGenres = (event: any) => {
     console.log('genre');
-    
   }
+
+  console.log(singleAnime);
+  
   return (
       <div className='p-8'>
         <div className='grid grid-cols-[30%_60%] gap-y-14 mb-6 text-lime-900'>

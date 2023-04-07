@@ -3,7 +3,7 @@ import { Main } from './pages/Main';
 import { About } from './pages/AboutPage';
 import { Navigation } from './components/Navigation';
 import { SingleAnime } from './pages/SingleAnimePage';
-import { Favorites } from './pages/Favorites'
+import { Favorite } from './pages/Favorite';
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
         <Route path='/' element={ <Main /> } />
         <Route path='/about' element={ <About /> } />
         <Route path='/:mal_id' element={<SingleAnime />} />
-        <Route path='/favorites' element={<Favorites />} />
+        <Route path='/favorite' element={<Favorite />} />
       </Routes>
     </>
   );

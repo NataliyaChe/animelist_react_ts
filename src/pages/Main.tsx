@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { IAnimeCard } from '../interfaces/animeInterfaces';
 import Pagination from '../components/Pagination';
-import {IPaganationEvent} from '../interfaces/IPaganationEvent';
+import {IPaganationEvent} from '../interfaces/eventInterfases';
 import AnimeTable from '../components/AnimeTable';
 import GenreList from '../components/GenreList';
 import { IGenre } from '../interfaces/animeInterfaces';
@@ -12,10 +12,10 @@ export function Main() {
   const [animes, setAnimes] = useState<IAnimeCard[]>([]);
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const animesPerPage = 25;
-  const { get } = useApi()
+  const { get } = useApi();
 
   const [genres, setGenres] = useState<IGenre[]>([]);
+  const [isMain, setIsMain] = useState<boolean>(true)
   
   useEffect(() => {
     const params = 'top/anime'
@@ -46,7 +46,7 @@ export function Main() {
   return (
     <div className='p-8'>
       <div className='flex justify-between gap-8'>
-        <AnimeTable animes={animes}/>
+        <AnimeTable animes={animes} isMain={isMain}/>
         <GenreList genres={genres}/>
       </div>
       <Pagination 

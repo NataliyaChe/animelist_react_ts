@@ -8,10 +8,10 @@ interface AnimelistProps {
 function Animelist({animes}: AnimelistProps) {
   return (
     <div className='grid grid-cols-5'>
-        {animes.map(anime => {
+        {/* {animes.map(anime => {
           return <AnimeCard anime={anime} key={anime.mal_id} />
         }
-      )}    
+      )}     */}
     </div>
   );
 }

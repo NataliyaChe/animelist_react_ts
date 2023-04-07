@@ -3,9 +3,11 @@ import TableRow from './TableRow';
 
 interface AnimeTableProps {
   animes: IAnimeCard[]
+  isMain: boolean
+  deleteFromFavorite?: any
 }
 
-function AnimeTable ({animes}: AnimeTableProps) {
+function AnimeTable ({animes, isMain, deleteFromFavorite}: AnimeTableProps) {
 
     return (
         <table className='w-10/12 border-collapse border-solid border-2  border-lime-600'>
@@ -39,7 +41,7 @@ function AnimeTable ({animes}: AnimeTableProps) {
             </thead>
             <tbody>
                 {animes.map(anime => 
-                    <TableRow anime={anime} key={anime.mal_id} />
+                    <TableRow anime={anime} key={anime.mal_id} isMain={isMain} deleteFromFavorite={deleteFromFavorite}/>
                 )} 
             </tbody>
         </table>

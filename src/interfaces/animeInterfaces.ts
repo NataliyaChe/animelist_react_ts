@@ -1,17 +1,16 @@
 export interface IGenre {
     mal_id: number
     name: string
-    url: string
-    count: number
 }
 
 export interface IAnimeCard {
+    id?: number
     mal_id: number
     title: string
     genres: [
         IGenre
     ]
-    type: number
+    type: string
     year: number
     episodes: number
     images: {
