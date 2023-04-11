@@ -1,28 +1,33 @@
 import { useState, useEffect } from 'react';
 import { IAnimeCard } from '../interfaces/animeInterfaces';
-// import Pagination from '../components/Pagination';
-// import {IPaganationEvent} from '../interfaces/IPaganationEvent';
+import Pagination from '../components/Pagination';
+import {IPaginationEvent} from '../interfaces/eventInterfases';
 import AnimeTable from '../components/AnimeTable';
 import { IDeleteFavoriteEvent } from '../interfaces/eventInterfases';
+import { useApi } from '../hooks/useApi';
 
 export function Favorite() {
   const [animes, setAnimes] = useState<IAnimeCard[]>([]);
-  // const [totalPages, setTotalPages] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [isMain, setIsMain] = useState<boolean>(false)
+  const [totalPages, setTotalPages] = useState(0);
+  const [isMain, setIsMain] = useState<boolean>(false);
+  const { getFavorites, deleteFromFavorites } = useApi();
+  const itemsPerPage = 25;
+  const [firstItem, setFirstItem] = useState(0);
+  const lastItem = firstItem + itemsPerPage;
 
   useEffect(() => {
     const fetchFavorite = async () => {
-      const data = await fetch('http://localhost:3004/favorites?limit=${animesPerPage}&page=${currentPage}');
-      const animes = await data.json() as IAnimeCard[];
+      const animes = await getFavorites()
       setAnimes(animes)
+      setTotalPages(Math.ceil(animes.length / itemsPerPage))
     }
     fetchFavorite()
-  }, [currentPage])
+  }, [])
 
-  // const changePage = (event: IPaganationEvent) => {
-  //   setCurrentPage(event.selected+1)
-  // }
+  const paginatedFavorites = animes.slice(firstItem, lastItem);
+  const changePage = (event: IPaginationEvent) => {
+    setFirstItem(event.selected * itemsPerPage)
+  }
 
   const deleteFromFavorite = (event: IDeleteFavoriteEvent) => {
     const animeId = +event.target.dataset.id;
@@ -30,22 +35,19 @@ export function Favorite() {
         return anime.id !== animeId;
     })
     setAnimes(filteredAnimes);
-    remove(animeId)
+    deleteFromFavorites(animeId)
   }
 
-  function remove(animeId: number) {
-    fetch(`http://localhost:3004/favorites/${animeId}`, {
-        method: 'DELETE'
-    })
-  }
-
-    return (
-      <div className='p-8'>
-        <AnimeTable animes={animes} isMain={isMain} deleteFromFavorite={deleteFromFavorite}/>
-        {/* <Pagination 
-          changePage={changePage} 
-          totalPages={totalPages}
-      /> */}
-      </div>
-    );
-  }
+  return (
+    <div className='p-8'>
+      <AnimeTable 
+        animes={animes.length > 25 ? paginatedFavorites : animes} 
+        isMain={isMain} 
+        deleteFromFavorite={deleteFromFavorite}/>
+      <Pagination 
+        changePage={changePage} 
+        totalPages={totalPages}
+    />
+    </div>
+  );
+}

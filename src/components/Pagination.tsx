@@ -1,8 +1,8 @@
 import ReactPaginate from 'react-paginate';
-import {IPaganationEvent} from '../interfaces/eventInterfases'
+import {IPaginationEvent} from '../interfaces/eventInterfases'
 
 interface PaginationProps {
-  changePage(event: IPaganationEvent): void
+  changePage(event: IPaginationEvent): void
   totalPages: number
 }
 

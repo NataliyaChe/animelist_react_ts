@@ -1,16 +1,22 @@
 import { useState } from 'react';
 import { IAnimeCard, IGenre } from '../interfaces/animeInterfaces';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useLocation } from 'react-router-dom';
+import { useApi } from '../hooks/useApi';
 
 interface TableRowProps {
   anime: IAnimeCard
   isMain: boolean
   deleteFromFavorite?: any
+  updateFavorites?: any
 }
 
 function TableRow({anime, isMain, deleteFromFavorite}: TableRowProps) {
   const genres = anime.genres.map(genre => genre.name).join(', ');
   let navigate = useNavigate();
+  const { addToFavorites } = useApi();
+  const location = useLocation();
+  console.log('location', location);
+  
 
   const updateFavorites = (event: React.MouseEvent) => {
     if(isMain) {
@@ -26,16 +32,8 @@ function TableRow({anime, isMain, deleteFromFavorite}: TableRowProps) {
         "rank": anime.rank,
         "synopsis": anime.synopsis
       }
-      post(favoriteAnime);
+      addToFavorites(favoriteAnime);
     } 
-}
-
-function post(favoriteAnime: IAnimeCard) {
-  fetch('http://localhost:3004/favorites', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(favoriteAnime)
-  })
 }
 
   return (

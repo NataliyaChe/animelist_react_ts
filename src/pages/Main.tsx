@@ -1,28 +1,24 @@
 import { useState, useEffect } from 'react';
 import { IAnimeCard } from '../interfaces/animeInterfaces';
 import Pagination from '../components/Pagination';
-import {IPaganationEvent} from '../interfaces/eventInterfases';
+import {IPaginationEvent} from '../interfaces/eventInterfases';
 import AnimeTable from '../components/AnimeTable';
 import GenreList from '../components/GenreList';
 import { IGenre } from '../interfaces/animeInterfaces';
-import { IGenresResponse } from '../interfaces/responseInterfaces';
 import { useApi } from '../hooks/useApi';
 
 export function Main() {
   const [animes, setAnimes] = useState<IAnimeCard[]>([]);
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const { get } = useApi();
+  const { getAnimes, getGenres } = useApi();
 
   const [genres, setGenres] = useState<IGenre[]>([]);
   const [isMain, setIsMain] = useState<boolean>(true)
   
   useEffect(() => {
-    const params = 'top/anime'
     const fetchAnimes = async () => {
-      // const data = await fetch(`https://api.jikan.moe/v4/top/anime?limit=${animesPerPage}&page=${currentPage}`);
-      // const animes = await data.json() as IAnimesResponse;
-      const animes = await get(currentPage, params)
+      const animes = await getAnimes(currentPage)
       setTotalPages(animes.pagination.last_visible_page
         );
       setAnimes(animes.data);
@@ -30,14 +26,13 @@ export function Main() {
     fetchAnimes()
   }, [currentPage])
 
-  const changePage = (event: IPaganationEvent) => {
+  const changePage = (event: IPaginationEvent) => {
     setCurrentPage(event.selected+1)
   }
 
   useEffect(() => {
     const fetchGenres = async () => {
-      const data = await fetch('https://api.jikan.moe/v4/genres/anime');
-      const genres = await data.json() as IGenresResponse;
+      const genres = await getGenres()
       setGenres(genres.data);
     }
     fetchGenres()

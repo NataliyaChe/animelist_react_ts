@@ -6,25 +6,17 @@ import { useApi } from '../hooks/useApi'
 export function SingleAnime() {
   const params = useParams();
   const [singleAnime, setSingleAnime] = useState<IAnimeCard>();
-  const {getItem} = useApi();
+  const {getSingleAnime} = useApi();
 
   useEffect(() => {
-    console.log('params.mal_id', params.mal_id);
-    
-    const animeId = params.mal_id
-      const fetchSingleAnime = async () => {
-        const data = await fetch(`https://api.jikan.moe/v4/anime/${params.mal_id}`);
-        const singleAnime = await data.json();
-        console.log('singleAnime', singleAnime);
-        
-        // const singleAnime = await getItem(animeId)
-        setSingleAnime(singleAnime.data);
-      }
-      fetchSingleAnime()
-    }, []);
+    const animeId = Number(params.mal_id)
+    const fetchSingleAnime = async () => {
+      const singleAnime = await getSingleAnime(animeId)
+      setSingleAnime(singleAnime.data);
+    }
+    fetchSingleAnime()
+  }, []);
 
-
-  
   const getAnimesByGenres = (event: any) => {
     console.log('genre');
   }

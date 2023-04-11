@@ -1,4 +1,4 @@
-export interface IPaganationEvent {
+export interface IPaginationEvent {
     selected: number
   }
 
