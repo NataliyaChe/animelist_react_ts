@@ -1,16 +1,15 @@
-import { useState } from 'react';
-import { IAnimeCard, IGenre } from '../interfaces/animeInterfaces';
+
+import { IAnimeCard, IGenre } from '../../interfaces/animeInterfaces';
 import {useNavigate, useLocation } from 'react-router-dom';
-import { useApi } from '../hooks/useApi';
+import { useApi } from '../../hooks/useApi';
 
 interface TableRowProps {
   anime: IAnimeCard
   isMain: boolean
-  deleteFromFavorite?: any
-  updateFavorites?: any
+  action?: any
 }
 
-function TableRow({anime, isMain, deleteFromFavorite}: TableRowProps) {
+function TableRow({anime, isMain, action}: TableRowProps) {
   const genres = anime.genres.map(genre => genre.name).join(', ');
   let navigate = useNavigate();
   const { addToFavorites } = useApi();
@@ -18,23 +17,23 @@ function TableRow({anime, isMain, deleteFromFavorite}: TableRowProps) {
   console.log('location', location);
   
 
-  const updateFavorites = (event: React.MouseEvent) => {
-    if(isMain) {
-      const favoriteAnime: IAnimeCard  = {
-        "id": anime.mal_id,
-        "mal_id": anime.mal_id,
-        "title": anime.title,
-        "genres": anime.genres,
-        "type": anime.type,
-        "year": anime.year,
-        "episodes": anime.episodes,
-        "images": anime.images,
-        "rank": anime.rank,
-        "synopsis": anime.synopsis
-      }
-      addToFavorites(favoriteAnime);
-    } 
-}
+  // const updateFavorites = (event: React.MouseEvent) => {
+  //   if(isMain) {
+  //     const favoriteAnime: IAnimeCard  = {
+  //       "id": anime.mal_id,
+  //       "mal_id": anime.mal_id,
+  //       "title": anime.title,
+  //       "genres": anime.genres,
+  //       "type": anime.type,
+  //       "year": anime.year,
+  //       "episodes": anime.episodes,
+  //       "images": anime.images,
+  //       "rank": anime.rank,
+  //       "synopsis": anime.synopsis
+  //     }
+  //     addToFavorites(favoriteAnime);
+  //   } 
+  // }
 
   return (
     <tr key={anime.mal_id} 
@@ -74,7 +73,7 @@ function TableRow({anime, isMain, deleteFromFavorite}: TableRowProps) {
           <button 
               className={ isMain ? "bg-notfavorite bg-no-repeat w-10 h-10 bg-contain rounded-md font-semibold" : "bg-isfavorite bg-no-repeat w-10 h-10 bg-contain rounded-md font-semibold" }
               data-id={anime.id}
-              onClick={isMain ? updateFavorites : deleteFromFavorite}>
+              onClick={action}>
           </button>
         </td>
     </tr>

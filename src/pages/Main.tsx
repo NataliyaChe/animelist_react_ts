@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import { IAnimeCard } from '../interfaces/animeInterfaces';
 import Pagination from '../components/Pagination';
 import {IPaginationEvent} from '../interfaces/eventInterfases';
-import AnimeTable from '../components/AnimeTable';
+import AnimeTable from '../components/Table/AnimeTable';
 import GenreList from '../components/GenreList';
 import { IGenre } from '../interfaces/animeInterfaces';
 import { useApi } from '../hooks/useApi';
+import { IDeleteFavoriteEvent } from '../interfaces/eventInterfases';
 
 export function Main() {
   const [animes, setAnimes] = useState<IAnimeCard[]>([]);
@@ -38,10 +39,17 @@ export function Main() {
     fetchGenres()
   }, [])
 
+  const updateFavorites = (event: IDeleteFavoriteEvent) => {
+    // const animeId = +event.target.dataset.id;
+    console.log('event updateFavorites', event);
+  }
+
   return (
     <div className='p-8'>
       <div className='flex justify-between gap-8'>
-        <AnimeTable animes={animes} isMain={isMain}/>
+        <AnimeTable animes={animes} 
+          isMain={isMain}
+          updateFavorites={updateFavorites}/>
         <GenreList genres={genres}/>
       </div>
       <Pagination 

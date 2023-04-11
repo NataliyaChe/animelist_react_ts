@@ -6,7 +6,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         'notfavorite': "url('../src/images/star2.png')",
-        'isfavorite': "url('../src/images/star1.png')",
+        'isfavorite': "url('../src/images/delete.png')",
         },
     },
   },

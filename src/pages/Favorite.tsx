@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { IAnimeCard } from '../interfaces/animeInterfaces';
 import Pagination from '../components/Pagination';
 import {IPaginationEvent} from '../interfaces/eventInterfases';
-import AnimeTable from '../components/AnimeTable';
+import AnimeTable from '../components/Table/AnimeTable';
 import { IDeleteFavoriteEvent } from '../interfaces/eventInterfases';
 import { useApi } from '../hooks/useApi';
 
