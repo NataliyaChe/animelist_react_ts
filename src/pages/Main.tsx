@@ -52,17 +52,19 @@ export function Main() {
     const animeId = +event.target.dataset.id;
     if(!favoriteAnimes.find(anime => anime.mal_id === animeId))  {
       const targetAnime: any = animes.find(anime => anime.mal_id === animeId);
+      console.log('targetAnime', targetAnime);
+      
       const favoriteAnime: IAnimeCard  = {
-        "id": targetAnime.mal_id,
-        "mal_id": targetAnime.mal_id,
-        "title": targetAnime.title,
-        "genres": targetAnime.genres,
-        "type": targetAnime.type,
-        "year": targetAnime.year,
-        "episodes": targetAnime.episodes,
-        "images": targetAnime.images,
-        "rank": targetAnime.rank,
-        "synopsis": targetAnime.synopsis
+        id: targetAnime.mal_id,
+        mal_id: targetAnime.mal_id,
+        title: targetAnime.title,
+        genres: targetAnime.genres,
+        type: targetAnime.type,
+        year: targetAnime.year,
+        episodes: targetAnime.episodes,
+        images: targetAnime.images,
+        rank: targetAnime.rank,
+        synopsis: targetAnime.synopsis
       }
       addToFavorites(favoriteAnime);
       setFavoriteAnimes([...favoriteAnimes, favoriteAnime])
