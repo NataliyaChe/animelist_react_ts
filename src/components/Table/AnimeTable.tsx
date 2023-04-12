@@ -5,22 +5,13 @@ import { useLocation } from 'react-router-dom';
 
 interface AnimeTableProps {
   animes: IAnimeCard[]
-  isMain: boolean
   deleteFromFavorite?: any
   updateFavorites?: any
 }
 
-function AnimeTable ({animes, isMain, deleteFromFavorite, updateFavorites}: AnimeTableProps) {
+function AnimeTable ({animes, deleteFromFavorite, updateFavorites}: AnimeTableProps) {
     const location = useLocation();
     console.log('location table', location);
-
-const action = () => {
-    if(location.pathname === "/favorite") {
-        deleteFromFavorite()
-    } else {
-        updateFavorites()
-    }
-} 
 
     return (
         <table className='w-10/12 border-collapse border-solid border-2  border-lime-600'>
@@ -30,8 +21,8 @@ const action = () => {
             <tbody>
                 {animes.map(anime => 
                     <TableRow anime={anime} key={anime.mal_id} 
-                    isMain={isMain}
-                    action={action}
+                    updateFavorites={updateFavorites}
+                    deleteFromFavorite={deleteFromFavorite}
                     />
                 )} 
             </tbody>

@@ -2,7 +2,7 @@ export interface IPaginationEvent {
     selected: number
   }
 
-export interface IDeleteFavoriteEvent {
+export interface IFavoriteEvent {
   target: {
     dataset: {
       id: number
