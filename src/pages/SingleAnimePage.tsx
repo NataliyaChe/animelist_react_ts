@@ -7,7 +7,7 @@ export function SingleAnime() {
   const params = useParams();
   const [singleAnime, setSingleAnime] = useState<IAnimeCard>();
   const {getSingleAnime} = useApi();
-
+  
   useEffect(() => {
     const animeId = Number(params.mal_id)
     const fetchSingleAnime = async () => {

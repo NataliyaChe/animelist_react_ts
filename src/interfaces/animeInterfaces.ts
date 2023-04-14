@@ -4,7 +4,6 @@ export interface IGenre {
 }
 
 export interface IAnimeCard {
-    id?: number
     mal_id: number
     title: string
     genres: [
@@ -20,4 +19,8 @@ export interface IAnimeCard {
     }
     rank: number
     synopsis: string
+}
+
+export interface IFavoriteAnimeCard extends IAnimeCard {
+    id: number
 }

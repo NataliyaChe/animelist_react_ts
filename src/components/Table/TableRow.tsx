@@ -4,11 +4,10 @@ import {useNavigate, useLocation } from 'react-router-dom';
 
 interface TableRowProps {
   anime: IAnimeCard
-  deleteFromFavorite?: any
-  updateFavorites?: any
+  action: (event: React.MouseEvent<HTMLButtonElement>)=>void
 }
 
-function TableRow({anime, updateFavorites, deleteFromFavorite }: TableRowProps) {
+function TableRow({anime, action }: TableRowProps) {
   const genres = anime.genres.map(genre => genre.name).join(', ');
   let navigate = useNavigate();
   const location: {pathname: string} = useLocation();
@@ -51,7 +50,7 @@ function TableRow({anime, updateFavorites, deleteFromFavorite }: TableRowProps) 
           <button 
               className={ (location.pathname === '/') ? "bg-notfavorite bg-no-repeat w-10 h-10 bg-contain rounded-md font-semibold" : "bg-isfavorite bg-no-repeat w-10 h-10 bg-contain rounded-md font-semibold" }
               data-id={anime.mal_id}
-              onClick={location.pathname === '/favorite' ? deleteFromFavorite : updateFavorites }
+              onClick={action}
               >
           </button>
         </td>

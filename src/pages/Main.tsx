@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { IAnimeCard, IGenre } from '../interfaces/animeInterfaces';
+import { IAnimeCard, IGenre, IFavoriteAnimeCard } from '../interfaces/animeInterfaces';
 import Pagination from '../components/Pagination';
 import {IPaginationEvent} from '../interfaces/eventInterfases';
 import AnimeTable from '../components/Table/AnimeTable';
 import GenreList from '../components/GenreList';
 import { useApi } from '../hooks/useApi';
-import { IFavoriteEvent } from '../interfaces/eventInterfases';
 
 export function Main() {
   const [animes, setAnimes] = useState<IAnimeCard[]>([]);
@@ -47,27 +46,21 @@ export function Main() {
   //   }
   //   fetchGenres()
   // }, [])
-
-  function updateFavorites(event: IFavoriteEvent) {
-    const animeId = +event.target.dataset.id;
+ 
+  function updateFavorites(event: React.MouseEvent<HTMLButtonElement>) {
+    const { dataset } = event.currentTarget 
+    const newValue = Number(dataset.id)
+    
+    const animeId = newValue;
     if(!favoriteAnimes.find(anime => anime.mal_id === animeId))  {
-      const targetAnime: any = animes.find(anime => anime.mal_id === animeId);
+      const targetAnime = animes.find(anime => anime.mal_id === animeId) as IFavoriteAnimeCard;
       console.log('targetAnime', targetAnime);
       
-      const favoriteAnime: IAnimeCard  = {
-        id: targetAnime.mal_id,
-        mal_id: targetAnime.mal_id,
-        title: targetAnime.title,
-        genres: targetAnime.genres,
-        type: targetAnime.type,
-        year: targetAnime.year,
-        episodes: targetAnime.episodes,
-        images: targetAnime.images,
-        rank: targetAnime.rank,
-        synopsis: targetAnime.synopsis
+      const favoriteAnime = {
+        ...targetAnime, id: targetAnime.mal_id
       }
       addToFavorites(favoriteAnime);
-      setFavoriteAnimes([...favoriteAnimes, favoriteAnime])
+      setFavoriteAnimes([...favoriteAnimes, favoriteAnime]);
     } 
   }
 
@@ -75,7 +68,8 @@ export function Main() {
     <div className='p-8'>
       <div className='flex justify-between gap-8'>
         <AnimeTable animes={animes} 
-          updateFavorites={updateFavorites}/>
+          action={updateFavorites}
+          />
         <GenreList genres={genres}/>
       </div>
       <Pagination 

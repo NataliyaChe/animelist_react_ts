@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { IAnimeCard } from '../interfaces/animeInterfaces';
+import { IAnimeCard, IFavoriteAnimeCard } from '../interfaces/animeInterfaces';
 import Pagination from '../components/Pagination';
 import {IPaginationEvent} from '../interfaces/eventInterfases';
 import AnimeTable from '../components/Table/AnimeTable';
-import { IFavoriteEvent } from '../interfaces/eventInterfases';
 import { useApi } from '../hooks/useApi';
 
 export function Favorite() {
@@ -28,9 +27,12 @@ export function Favorite() {
     setFirstItem(event.selected * itemsPerPage)
   }
 
-  const deleteFromFavorite = (event: IFavoriteEvent) => {
-    const animeId = +event.target.dataset.id;
-    const deletedAnime: any = favoriteAnimes.find(favoriteAnime => favoriteAnime.mal_id === animeId);
+  const deleteFromFavorite = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const { dataset } = event.currentTarget 
+    const newValue = Number(dataset.id)
+    
+    const animeId = newValue;
+    const deletedAnime = favoriteAnimes.find(favoriteAnime => favoriteAnime.mal_id === animeId) as IFavoriteAnimeCard;
     console.log('updateFavorites', deletedAnime);
     const filteredAnimes = favoriteAnimes.filter(favoriteAnime => {
         return favoriteAnime.mal_id !== animeId;
@@ -43,7 +45,8 @@ export function Favorite() {
     <div className='p-8'>
       <AnimeTable 
         animes={favoriteAnimes.length > 25 ? paginatedFavorites : favoriteAnimes} 
-        deleteFromFavorite={deleteFromFavorite}/>
+        action={deleteFromFavorite}
+        />
       <Pagination 
         changePage={changePage} 
         totalPages={totalPages}

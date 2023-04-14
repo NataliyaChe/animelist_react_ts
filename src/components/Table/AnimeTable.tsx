@@ -1,17 +1,13 @@
 import { IAnimeCard } from '../../interfaces/animeInterfaces';
 import TableRow from './TableRow';
 import TableHead from './TableHead';
-import { useLocation } from 'react-router-dom';
 
 interface AnimeTableProps {
-  animes: IAnimeCard[]
-  deleteFromFavorite?: any
-  updateFavorites?: any
+    animes: IAnimeCard[]
+    action: (event: React.MouseEvent<HTMLButtonElement>)=>void
 }
 
-function AnimeTable ({animes, deleteFromFavorite, updateFavorites}: AnimeTableProps) {
-    const location = useLocation();
-    console.log('location table', location);
+function AnimeTable ({animes, action}: AnimeTableProps) {
 
     return (
         <table className='w-10/12 border-collapse border-solid border-2  border-lime-600'>
@@ -21,8 +17,7 @@ function AnimeTable ({animes, deleteFromFavorite, updateFavorites}: AnimeTablePr
             <tbody>
                 {animes.map(anime => 
                     <TableRow anime={anime} key={anime.mal_id} 
-                    updateFavorites={updateFavorites}
-                    deleteFromFavorite={deleteFromFavorite}
+                    action={action}
                     />
                 )} 
             </tbody>
