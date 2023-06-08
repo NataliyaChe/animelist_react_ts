@@ -1,5 +1,5 @@
 import { IAnimeCard } from '../interfaces/animeInterfaces';
-import AnimeCard from './TableRow';
+import AnimeCard from './Table/TableRow';
 
 interface AnimelistProps {
   animes: IAnimeCard[]
